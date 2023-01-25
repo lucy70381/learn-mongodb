@@ -1,6 +1,9 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost:27017/learn-mongo');
+mongoose.set('strictQuery', false);
+mongoose
+  .connect('mongodb://127.0.0.1:27017/learn-mongo')
+  .catch((error) => console.log(error));
 
 /* 
 若 title 是一個物件，可以針對裡面的屬性設定型別

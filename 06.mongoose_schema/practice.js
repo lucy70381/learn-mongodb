@@ -1,6 +1,9 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost:27017/learn-mongo');
+mongoose.set('strictQuery', false);
+mongoose
+  .connect('mongodb://127.0.0.1:27017/learn-mongo')
+  .catch((error) => console.log(error));
 
 /* 
 - 產品名稱（product）: 需為字串,必填，若未填寫，錯誤訊息為「產品名稱未填寫」
