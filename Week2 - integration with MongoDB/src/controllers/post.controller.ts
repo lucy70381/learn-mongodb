@@ -1,13 +1,17 @@
 import { ServerResponse, IncomingMessage } from 'http';
 import Post from '../models/posts';
-import { successHandle } from '../services';
+import { errorHandle, successHandle } from '../services';
 
-const PostHandler = {
+const PostController = {
   getAllPosts: async (res: ServerResponse) => {
     try {
       const posts = await Post.find();
       successHandle(res, { data: posts });
-    } catch (error) {}
+    } catch (error) {
+      console.log(`Can't get all posts: ${error}`);
+      errorHandle(res, { data: error });
+    }
   },
 };
-export default PostHandler;
+
+export default PostController;
