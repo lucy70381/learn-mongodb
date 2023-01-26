@@ -1,5 +1,5 @@
 import { ServerResponse, IncomingMessage } from 'http';
-import Post from '../models/posts';
+import Post from '../models/Post';
 import { errorHandle, successHandle } from '../services';
 
 const PostController = {
