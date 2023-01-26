@@ -1,6 +1,5 @@
 import { IncomingMessage, ServerResponse } from 'http';
-
-import $posts from '../api/posts';
+import PostController from '../controllers/post.controller';
 
 const postHandler = (req: IncomingMessage, res: ServerResponse) => {
   const reqUrl = req.url;
@@ -8,7 +7,7 @@ const postHandler = (req: IncomingMessage, res: ServerResponse) => {
 
   switch (reqMethod) {
     case 'GET':
-      $posts.GET(req, res);
+      PostController.getAllPosts(res);
       break;
     default:
       break;
