@@ -1,7 +1,7 @@
 import { createServer, IncomingMessage, ServerResponse } from 'http';
 import mongoose, { MongooseError } from 'mongoose';
 
-import routes from './src/routes/routeWrapper';
+import router from './src/routes/router';
 
 const dotenv = require('dotenv');
 dotenv.config({ path: '.env' });
@@ -19,7 +19,7 @@ mongoose
   .catch((err: MongooseError) => console.log(err));
 
 const server = createServer((req: IncomingMessage, res: ServerResponse) => {
-  routes(req, res);
+  router(req, res);
 });
 
 server.listen(process.env.PORT, () => {
