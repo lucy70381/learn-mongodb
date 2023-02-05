@@ -9,7 +9,16 @@ const PostController = {
       successHandle(res, { data: posts });
     } catch (error) {
       console.log(`Can't get all posts: ${error}`);
-      errorHandle(res, { data: error });
+      errorHandle(res, { data: `Can't get all posts` });
+    }
+  },
+  getPostById: async (id: String, res: ServerResponse) => {
+    try {
+      const post = await Post.findById(id);
+      successHandle(res, { data: post });
+    } catch (error) {
+      console.log(`Can't get post by id: ${error}`);
+      errorHandle(res, { data: `Can't get post by id: ${id}` });
     }
   },
 };
