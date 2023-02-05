@@ -4,13 +4,10 @@ import postHandler from './post.routes';
 
 const router = (req: IncomingMessage, res: ServerResponse) => {
   const { url } = req;
+  console.log(url);
 
-  switch (url) {
-    case '/posts':
-      postHandler(req, res);
-      break;
-    default:
-      break;
+  if (url?.startsWith('/posts')) {
+    postHandler(req, res);
   }
 };
 
