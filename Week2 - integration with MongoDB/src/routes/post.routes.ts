@@ -33,6 +33,10 @@ const postHandler = async (req: IncomingMessage, res: ServerResponse) => {
       if (url?.startsWith('/posts/')) {
         PostController.updatePost(id, body, res);
       }
+    case 'DELETE':
+      if (url?.startsWith('/posts/')) {
+        PostController.deletePostById(id, res);
+      }
     default:
       break;
   }

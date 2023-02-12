@@ -12,7 +12,7 @@ const PostController = {
       errorHandle(res, { data: `Can't get all posts` });
     }
   },
-  getPostById: async (id: String, res: ServerResponse) => {
+  getPostById: async (id: string, res: ServerResponse) => {
     try {
       const post = await Post.findById(id);
       successHandle(res, { data: post });
@@ -36,7 +36,6 @@ const PostController = {
         await Post.findById(id);
       } catch (error) {
         errorHandle(res, { data: `Post id: ${id} not found` });
-        return;
       }
       const post = await Post.findByIdAndUpdate(id, JSON.parse(body), {
         returnDocument: 'after', // return the updated document
@@ -44,6 +43,19 @@ const PostController = {
       successHandle(res, { msg: 'Post updated', data: post });
     } catch (error) {
       errorHandle(res, { data: `Can't update post. ${error}` });
+    }
+  },
+  deletePostById: async (id: string, res: ServerResponse) => {
+    try {
+      try {
+        await Post.findById(id);
+      } catch (error) {
+        errorHandle(res, { data: `Post id: ${id} not found` });
+      }
+      await Post.deleteOne({ _id: id })
+      successHandle(res, { msg: `Post ${id} deleted.` });
+    } catch (error) {
+      errorHandle(res, { data: `Can't delete post. ${error}` });
     }
   },
 };
