@@ -21,6 +21,14 @@ const PostController = {
       errorHandle(res, { data: `Can't get post by id: ${id}` });
     }
   },
+  addPost: async (body: string, res: ServerResponse) => {
+    try {
+      const post = await Post.create(JSON.parse(body));
+      successHandle(res, { data: post });
+    } catch (error) {
+      errorHandle(res, { data: `Can't add post. ${error}` });
+    }
+  },
 };
 
 export default PostController;
