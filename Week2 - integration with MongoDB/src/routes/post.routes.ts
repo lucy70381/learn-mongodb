@@ -2,7 +2,7 @@ import { Resolver } from 'dns';
 import { IncomingMessage, ServerResponse } from 'http';
 import PostController from '../controllers/post.controller';
 
-const postHandler = async (req: IncomingMessage, res: ServerResponse) => {
+const postRoute = async (req: IncomingMessage, res: ServerResponse) => {
   const { url, method } = req;
 
   // get data from request
@@ -15,7 +15,6 @@ const postHandler = async (req: IncomingMessage, res: ServerResponse) => {
   await new Promise((resolve) => req.on('end', resolve));
 
   const id = url?.split('/').pop() ?? '';
-  console.log(id);
 
   switch (method) {
     case 'GET':
@@ -42,4 +41,4 @@ const postHandler = async (req: IncomingMessage, res: ServerResponse) => {
   }
 };
 
-export default postHandler;
+export default postRoute;
