@@ -29,6 +29,23 @@ const PostController = {
       errorHandle(res, { data: `Can't add post. ${error}` });
     }
   },
+  updatePost: async (id: string, body: string, res: ServerResponse) => {
+    try {
+      // check if post exists (if not, findByIdAndUpdate will create a new post
+      try {
+        await Post.findById(id);
+      } catch (error) {
+        errorHandle(res, { data: `Post id: ${id} not found` });
+        return;
+      }
+      const post = await Post.findByIdAndUpdate(id, JSON.parse(body), {
+        returnDocument: 'after', // return the updated document
+      });
+      successHandle(res, { msg: 'Post updated', data: post });
+    } catch (error) {
+      errorHandle(res, { data: `Can't update post. ${error}` });
+    }
+  },
 };
 
 export default PostController;

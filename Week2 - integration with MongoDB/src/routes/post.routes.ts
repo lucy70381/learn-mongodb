@@ -29,6 +29,10 @@ const postHandler = async (req: IncomingMessage, res: ServerResponse) => {
       if (url === '/posts') {
         PostController.addPost(body, res);
       }
+    case 'PATCH':
+      if (url?.startsWith('/posts/')) {
+        PostController.updatePost(id, body, res);
+      }
     default:
       break;
   }
