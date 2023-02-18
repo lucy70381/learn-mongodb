@@ -1,7 +1,7 @@
 import { createServer, IncomingMessage, ServerResponse } from 'http';
 import mongoose, { MongooseError } from 'mongoose';
 
-import router from './src/routes/router';
+import router from './routes/router';
 
 const dotenv = require('dotenv');
 dotenv.config({ path: '.env' });
