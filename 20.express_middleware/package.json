@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsc -w & nodemon dist/app.js",
+    "dev2": "tsc -w & nodemon dist/practice.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
