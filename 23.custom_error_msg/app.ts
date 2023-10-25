@@ -1,6 +1,7 @@
 import express, { Request, Response, NextFunction } from 'express';
 
 import AppError from './service/app_error';
+import { postRouter } from './pratice';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -16,6 +17,8 @@ app.get('/product/:id', (req: Request, res: Response, next: NextFunction) => {
     next(err);
   }
 });
+
+app.use('/post', postRouter);
 
 // 404 middleware
 app.use((req: Request, res: Response, next: NextFunction) => {
