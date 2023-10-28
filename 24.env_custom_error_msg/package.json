@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "tsc -w & NODE_ENV=development nodemon dist/app.js",
     "prod": "tsc -w & NODE_ENV=production nodemon dist/app.js",
+    "dev2": "tsc -w & NODE_ENV=development nodemon dist/practice.js",
+    "prod2": "tsc -w & NODE_ENV=production nodemon dist/practice.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
