@@ -8,6 +8,7 @@ import express, {
 
 import bcypt from 'bcrypt';
 import mongoose from 'mongoose';
+import validator from 'validator';
 
 import User from './models/user';
 import handleErrorAsync from './service/handle_error_async';
@@ -27,6 +28,21 @@ app.post(
   '/user/sign_up',
   handleErrorAsync(async (req: Request, res: Response, next: NextFunction) => {
     const { email, password, confirmPassword } = req.body;
+
+    // // 加入驗證，確保使用者註冊資料符合格式
+    if (!email || !password || !confirmPassword) {
+      next(
+        new AppError(400, 'Email, password and confirm password are required')
+      );
+    }
+
+    if (password !== confirmPassword) {
+      next(new AppError(400, 'Password and confirm password are not match'));
+    }
+
+    if (!validator.isEmail(email)) {
+      next(new AppError(400, 'Email is invalid'));
+    }
 
     const user = await User.create({
       email,
