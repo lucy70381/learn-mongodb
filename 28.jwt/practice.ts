@@ -7,6 +7,8 @@ import express, {
 } from 'express';
 
 import bcypt from 'bcrypt';
+import dotenv from 'dotenv';
+import jwt from 'jsonwebtoken';
 import mongoose from 'mongoose';
 import validator from 'validator';
 
@@ -18,6 +20,8 @@ mongoose.set('strictQuery', false);
 mongoose
   .connect('mongodb://127.0.0.1:27017/learn-mongo')
   .catch((error: any) => console.log(error));
+
+dotenv.config();
 
 const app = express();
 
@@ -49,7 +53,12 @@ app.post(
       password: await bcypt.hash(password, 12),
     });
 
-    res.status(200).json({ status: 'success', data: user });
+    res.status(200).json({
+      status: 'success',
+      data: jwt.sign({ id: user.id }, process.env.JWT_SECRET!, {
+        expiresIn: process.env.JWT_EXPIRES_DAY,
+      }),
+    });
   })
 );
 
